@@ -18,4 +18,15 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
 echo "enable some plugins"
 sed -i .back 's/plugins=(git)/plugins=(fzf git cp zsh-syntax-highlighting zsh-autosuggestions rand-quote extract sudo z)/g' ~/.zshrc 
 
+echo "some common aliases"
+cat >>~/.zshrc <<EOF
+
+alias sed="docker run -i busybox sed"
+alias kgp="kubectl get po"
+alias kgn="kubectl get node"
+alias kgnl="kubectl get node -l"
+alias kaf="kubectl apply -f""
+alias kgsys="kubectl get -n kube-system"
+EOF
+
 source ~/.zshrc
