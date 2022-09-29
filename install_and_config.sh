@@ -22,6 +22,7 @@ echo "some common aliases"
 cat >>~/.zshrc <<EOF
 
 alias sed="docker run -i busybox sed"
+alias awk="docker run -i busybox awk"
 alias kgp="kubectl get po"
 alias kgn="kubectl get node"
 alias kgnl="kubectl get node -l"
