@@ -1,5 +1,8 @@
 #! /bin/bash
 
+echo "start busybox when start"
+echo "docker start busybox" >> ~/.bashrc
+
 echo "install zsh"
 brew install zsh
 
@@ -28,8 +31,8 @@ sed -i .back 's/plugins=(git)/plugins=(fzf git cp zsh-syntax-highlighting zsh-au
 echo "some common aliases"
 cat >>~/.zshrc <<EOF
 
-alias sed="docker run -i busybox sed"
-alias awk="docker run -i busybox awk"
+alias sed="docker exec -i busybox sed"
+alias awk="docker exec -i busybox awk"
 alias kgp="kubectl get po"
 alias kgn="kubectl get node"
 alias kgnl="kubectl get node -l"
