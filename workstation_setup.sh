@@ -1,7 +1,9 @@
-#! /bin/bash
+#!/bin/sh
 
-echo "start busybox when start"
-echo "docker start busybox" >> ~/.bashrc
+set -e
+
+echo "install git"
+yum install -y git
 
 echo "install zsh"
 brew install zsh
@@ -26,7 +28,7 @@ echo "install fzf"
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
 
 echo "enable some plugins"
-sed -i .back 's/plugins=(git)/plugins=(fzf git cp zsh-syntax-highlighting zsh-autosuggestions rand-quote extract sudo vscode z)/g' ~/.zshrc 
+sed -i .back 's/plugins=(git)/plugins=(fzf git cp zsh-syntax-highlighting zsh-autosuggestions rand-quote extract sudo vscode z)/g' ~/.zshrc
 
 echo "some common aliases"
 cat >>~/.zshrc <<EOF
@@ -41,3 +43,15 @@ alias kgsys="kubectl get -n kube-system"
 EOF
 
 source ~/.zshrc
+
+echo "install kubectl"
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
+echo "install helm"
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+
+echo "install python3"
+yum install -y python3
